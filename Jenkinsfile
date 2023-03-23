@@ -25,9 +25,9 @@ stages {
     stage('Merge release to main') {
                         steps {
                             script {
-                                git checkout main
-                                git merge --no-ff release
-                                git push origin main
+                                sh "git checkout main"
+                                sh "git merge --no-ff release"
+                                sh "git push origin main"
                                     }
                                 }
                              }
