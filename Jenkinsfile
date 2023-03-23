@@ -9,19 +9,27 @@ pipeline {
   }
 stages {
       stage('GIT checkout') {
-           steps {
-               script{
-                   if (env.GIT_BRANCH.contains('main')) {
-                echo 'Hello from main branch'
-                git branch: 'main', url: 'https://github.com/PandeeswariSubbaiya/Sample.git'
-                }
-               else {
-                   echo "Run this stage only if the branch is not main"
-                  git branch: 'release', url: 'https://github.com/PandeeswariSubbaiya/Sample.git' 
-               }
-               }
-          }
-        }
-    }
-    
-}
+                    steps {
+                        script{
+                               if (env.GIT_BRANCH.contains('main')) {
+                            echo 'Hello from main branch'
+                            git branch: 'main', url: 'https://github.com/PandeeswariSubbaiya/Sample.git'
+                            }
+                               else {
+                                   echo "Run this stage only if the branch is not main"
+                                  git branch: 'release', url: 'https://github.com/PandeeswariSubbaiya/Sample.git' 
+                               }
+                               }
+                          }
+                        }
+    stage('Merge release to main') {
+                        steps {
+                            script {
+                                git checkout main
+                                git merge --no-ff release
+                                git push origin main
+                                    }
+                                }
+                             }
+                    }
+            }
