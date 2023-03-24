@@ -27,9 +27,18 @@ stages {
                             script {
                                 sh "git checkout main"
                                 sh "git merge --no-ff release"
-                                sh "git push origin main"
                                     }
                                 }
                              }
-                    }
+     stage('Push Changes') {
+            steps {
+                // Push changes to the Git repository
+                withCredentials([usernamePassword(credentialsId: '<PandeeswariSubbaiya>', usernameVariable: 'PandeeswariSubbaiya', passwordVariable: 'Subbaiya@08')]) {
+                    sh "git config user.name 'Pandeeswari'"
+                    sh "git config user.email 'Pandeeswari318@gmail.com'"
+                    sh "git push origin main"
+                }
             }
+        }
+     }
+  }
