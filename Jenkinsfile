@@ -13,11 +13,11 @@ stages {
                         script{
                                if (env.GIT_BRANCH.contains('main')) {
                             echo 'Hello from main branch'
-                            git branch: 'main', url: 'https://github.com/PandeeswariSubbaiya/Sample.git'
+                            git branch: 'main', url: 'https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git'
                             }
                                else {
                                    echo "Run this stage only if the branch is not main"
-                                  git branch: 'release', url: 'https://github.com/PandeeswariSubbaiya/Sample.git' 
+                                  git branch: 'release', url: 'https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git' 
                                }
                                }
                           }
@@ -36,6 +36,7 @@ stages {
                 withCredentials([usernamePassword(credentialsId: 'PandeeswariSubbaiya', usernameVariable: 'PandeeswariSubbaiya', passwordVariable: 'Subbaiya@08')]) {
                     sh "git config user.name 'Pandeeswari'"
                     sh "git config user.email 'Pandeeswari318@gmail.com'"
+                    //sh "git push origin https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo/blob/main/Jenkinsfile"
                     sh "git push origin main"
                 }
             }
