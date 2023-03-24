@@ -36,9 +36,11 @@ stages {
                 withCredentials([usernamePassword(credentialsId: 'Jenkins_Github', usernameVariable: 'PandeeswariSubbaiya', passwordVariable: '')]) {
                     sh "git config user.name 'PandeeswariSubbaiya'"
                     sh "git config user.email 'pandeeswari1814@gmail.com'"
-                    sh "git push origin branch:main url:https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git"
-                    //sh "git push "https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git"
-                }
+                    sh '''
+                    git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
+                    git push jenkins main
+                    '''
+               }
             }
         }
      }
