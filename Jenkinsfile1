@@ -36,7 +36,7 @@ stages {
                 withCredentials([usernamePassword(credentialsId: 'PandeeswariSubbaiya', usernameVariable: 'PandeeswariSubbaiya', passwordVariable: 'Subbaiya@08')]) {
                     sh "git config user.name 'PandeeswariSubbaiya'"
                     sh "git config user.email 'pandeeswari1814@gmail.com'"
-                    sh "git push origin https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo/blob/main
+                    sh "git push origin branch: 'main', url:'https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git'
                     //sh "git push origin "
                 }
             }
