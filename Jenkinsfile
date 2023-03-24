@@ -26,7 +26,7 @@ stages {
                         steps {
                             script {
                                 sh "git checkout main"
-                                sh "git merge --no-ff release"
+                                sh "git merge --no-ff --allow-unrelated-histories release"
                                     }
                                 }
                              }
