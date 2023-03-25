@@ -37,6 +37,7 @@ stages {
                     sh "git config user.name 'PandeeswariSubbaiya'"
                     sh "git config user.email 'pandeeswari1814@gmail.com'"
                     sh '''
+                    ssh -T https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo
                     git remote remove jenkins
                     git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo
                     git push jenkins main
