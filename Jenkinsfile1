@@ -38,8 +38,8 @@ stages {
                     sh "git config user.email 'pandeeswari1814@gmail.com'"
                     sh '''
                     git remote remove jenkins
-                    git remote add jenkins https://140.82.121.4/PandeeswariSubbaiya/Testingjenkins_Repo.git
-                    ssh -T https://140.82.121.4/PandeeswariSubbaiya/Testingjenkins_Repo.git
+                    git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo
+                    ssh -T /usr/bin/git@https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo
                     git push jenkins main
                     '''
                }
