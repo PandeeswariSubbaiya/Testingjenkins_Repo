@@ -39,7 +39,7 @@ stages {
                     sh '''
                     git remote remove jenkins
                     git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo
-                    git push -u jenkins main
+                    git push -u jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo/blob/main/Jenkinsfile1
                     '''
                }
             }
