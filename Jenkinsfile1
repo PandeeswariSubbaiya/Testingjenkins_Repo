@@ -39,6 +39,7 @@ stages {
                     sh '''
                     git remote remove jenkins
                     git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
+                    ping github.com
                     ssh -T https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
                     git push jenkins main
                     '''
