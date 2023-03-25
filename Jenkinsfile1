@@ -33,11 +33,13 @@ stages {
      stage('Push Changes') {
             steps {
                 // Push changes to the Git repository
-                withCredentials([usernamePassword(credentialsId: 'Jenkins_Github', usernameVariable: 'PandeeswariSubbaiya', passwordVariable: '')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'git-credentials', usernameVariable: 'PandeeswariSubbaiya', passwordVariable: '')]) {
                     sh "git config user.name 'PandeeswariSubbaiya'"
                     sh "git config user.email 'pandeeswari1814@gmail.com'"
                     sh '''
-                    git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
+                    //git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
+                    git remote set-url origin git@github.com:PandeeswariSubbaiya/Testingjenkins_Repo.git
+                    ssh -T git@github.com
                     git push jenkins main
                     '''
                }
