@@ -38,8 +38,8 @@ stages {
                     sh "git config user.email 'pandeeswari1814@gmail.com'"
                     sh '''
                     //git remote add jenkins https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
-                    git remote set-url origin git@github.com:PandeeswariSubbaiya/Testingjenkins_Repo.git
-                    ssh -T git@github.com
+                    git remote set-url origin git@https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
+                    ssh -T git@https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git
                     git push jenkins main
                     '''
                }
