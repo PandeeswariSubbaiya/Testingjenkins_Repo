@@ -40,7 +40,6 @@ stages {
                     git remote -v
                     git remote remove jenkins
                     git remote add jenkins git@github.com:PandeeswariSubbaiya/Testingjenkins_Repo.git
-                    git push -u jenkins main
                     '''
                }
             }
