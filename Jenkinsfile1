@@ -30,19 +30,14 @@ stages {
                                     }
                                 }
                              }
-     stage('Push Changes') {
-            steps {
-                // Push changes to the Git repository
-                withCredentials([usernamePassword(credentialsId: 'Jenkins_Github', usernameVariable: 'PandeeswariSubbaiya', passwordVariable: 'GIT_PASSWORD')]) {
-                    sh "git config user.name 'PandeeswariSubbaiya'"
-                    sh "git config user.email 'pandeeswari1814@gmail.com'"
-                    sh '''
-                    git remote -v
-                    git remote remove jenkins
-                    git remote add jenkins git@github.com:PandeeswariSubbaiya/Testingjenkins_Repo.git
+    stage('Pull request') {
+        steps {
+            withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                        curl -d '{"title": "Merge changes from dev to main", "head": "main", "base": "dev"}' -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" https://api.github.com/repos/PandeeswariSubbaiya/Automated/pulls
                     '''
-               }
-            }
-        }
+                    }
+                 }
+             }
      }
   }
