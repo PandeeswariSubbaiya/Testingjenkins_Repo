@@ -31,7 +31,7 @@ pipeline {
       steps {
         script {
           sh 'curl -X POST https://api.github.com/repos/PandeeswariSubbaiya/Testingjenkins_Repo/pulls \
-              -H "Authorization: token GITHUB_TOKEN" \
+              -H "Authorization: token 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" \
               -d \'{"title": "Merge release to main", "head": "release", "base": "main"}\''
         }
       }
