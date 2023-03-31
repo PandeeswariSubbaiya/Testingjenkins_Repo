@@ -22,7 +22,14 @@ stages {
                                }
                           }
                         }
-    
+    stage('Merge release to main') {
+                        steps {
+                            script {
+                                sh "git checkout main"
+                                sh "git merge --no-ff --allow-unrelated-histories release"
+                                    }
+                                }
+                             }
     stage('Pull request') {
         steps {
             withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN')]) {
@@ -32,13 +39,5 @@ stages {
                     }
                  }
              }
-     stage('Merge release to main') {
-                        steps {
-                            script {
-                                sh "git checkout main"
-                                sh "git merge --no-ff --allow-unrelated-histories release"
-                                    }
-                                }
-                             }
      }
   }
