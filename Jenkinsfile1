@@ -22,22 +22,5 @@ stages {
                                }
                           }
                         }
-    stage('Merge release to main') {
-                        steps {
-                            script {
-                                sh "git checkout main"
-                                sh "git merge --no-ff --allow-unrelated-histories release"
-                                    }
-                                }
-                             }
-    stage('Pull request') {
-        steps {
-            withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN')]) {
-                sh '''
-                        curl -d '{"title": "Merge changes from dev to main", "head": "main", "base": "release"}' -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" https://api.github.com/repos/PandeeswariSubbaiya/Automated/pulls
-                    '''
-                    }
-                 }
-             }
-     }
+               }
   }
