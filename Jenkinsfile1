@@ -22,22 +22,5 @@ stages {
                                }
                           }
                         }
-    stage('Merge to main') {
-            steps {
-                git branch: 'main', url: 'https://github.com/PandeeswariSubbaiya/Testingjenkins_Repo.git'
-                git checkout: 'main'
-                sh 'git merge release'
-                git push
-            }
-        }
-    stage('Pull request') {
-        steps {
-            withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN')]) {
-                sh '''
-                        curl -d '{"title": "Merge changes from dev to main", "head": "main", "base": "release"}' -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" https://api.github.com/repos/PandeeswariSubbaiya/Automated/pulls
-                    '''
-                    }
-                 }
-             }
      }
   }
