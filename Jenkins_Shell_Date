@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh '''
           find . -type f -newermt "${FROM_DATE}" ! -newermt "${TO_DATE}" -print0 |
-          du -h --files0-from=- > cat file_sizes.txt
+          du -h --files0-from=- > output.txt
         '''
       }
     }
