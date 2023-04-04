@@ -1,8 +1,8 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'from_date', defaultValue: '2023-03-23', description: 'From date in yyyy-MM-dd format')
-        string(name: 'to_date', defaultValue: '2023-04-01', description: 'To date in yyyy-MM-dd format')
+        string(name: 'from_date', defaultValue: 'March 23, 2023', description: 'From date in MM-dd-YYY format')
+        string(name: 'to_date', defaultValue: 'March 27, 2023', description: 'To date in MM-dd-YYY format')
     }
     stages {
         stage('Find Files') {
