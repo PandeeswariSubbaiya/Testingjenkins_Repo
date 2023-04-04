@@ -1,16 +1,19 @@
 pipeline {
-    agent any
-    parameters {
-        string(name: 'from_date', defaultValue: '2023-03-01', description: 'From date in yyyy-MM-dd format')
-        string(name: 'to_date', defaultValue: '2023-04-04', description: 'To date in yyyy-MM-dd format')
+  agent any
+
+  parameters {
+    string(name: 'FROM_DATE', defaultValue: '2023-03-01', description: 'From date in YYYY-MM-DD format')
+    string(name: 'TO_DATE', defaultValue: '2023-04-01', description: 'To date in YYYY-MM-DD format')
+  }
+
+  stages {
+    stage('Find files') {
+      steps {
+        sh '''
+          find . -type f -newermt "${FROM_DATE}" ! -newermt "${TO_DATE}" -print0 |
+          du -h --files0-from=- > cat file_sizes.txt
+        '''
+      }
     }
-    stages {
-        stage('Find Files') {
-            steps {
-                sh '''
-                find . -type f -newermt "${params.from_date}" ! -newermt "${params.to_date}" -exec ls -lh {} \\; | awk '{printf "%s %s\n", $5, $9}'
-                '''
-            }
-        }
-    }
+  }
 }
