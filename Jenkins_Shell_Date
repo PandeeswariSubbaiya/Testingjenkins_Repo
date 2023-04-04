@@ -1,19 +1,23 @@
 pipeline {
-  agent any
-
-  parameters {
-    string(name: 'FROM_DATE', defaultValue: '2023-03-01', description: 'From date in YYYY-MM-DD format')
-    string(name: 'TO_DATE', defaultValue: '2023-04-01', description: 'To date in YYYY-MM-DD format')
-  }
-
-  stages {
-    stage('Find files') {
-      steps {
-        sh '''
-          find . -type f -newermt "${FROM_DATE}" ! -newermt "${TO_DATE}" -print0 |
-          du -h --files0-from=- > output.txt
-        '''
-      }
+    agent any
+    
+    stages {
+        stage('Find Files') {
+            steps {
+                script {
+                    // Prompt the user for the date range
+                    def from_date = input message: 'Enter from date (2023-03-01):', parameters: [string(defaultValue: '', description: 'Enter the start date in the format YYYY-MM-DD', name: 'FROM_DATE')]
+                    def to_date = input message: 'Enter to date (2023-04-04):', parameters: [string(defaultValue: '', description: 'Enter the end date in the format YYYY-MM-DD', name: 'TO_DATE')]
+                    
+                    // Run the shell script to find files created within the date range
+                    sh """
+                        #!/bin/bash
+                        
+                        # Find files created within the date range and pipe to du for size calculation
+                        find . -type f -newermt "${from_date}" ! -newermt "${to_date}" -print0 | du -h --files0-from=-
+                    """
+                }
+            }
+        }
     }
-  }
 }
