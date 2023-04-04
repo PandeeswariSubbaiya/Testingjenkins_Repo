@@ -1,17 +1,15 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'from_date', defaultValue: '2023-03-23', description: 'From date in yyyy-MM-dd format')
+        string(name: 'from_date', defaultValue: '2023-03-01', description: 'From date in yyyy-MM-dd format')
         string(name: 'to_date', defaultValue: '2023-04-04', description: 'To date in yyyy-MM-dd format')
     }
     stages {
         stage('Find Files') {
             steps {
-                script {
-                    def output = sh(script: "find . -type f -newermt ${params.from_date} ! -newermt ${params.to_date} -exec ls -lh {} \\; | awk '{printf \"%s %s\\\\n\", \$5, \$9}'", returnStdout: true)
-                    echo "Files created between ${params.from_date} and ${params.to_date}:"
-                    echo output
-                }
+                sh '''
+                find . -type f -newermt "${params.from_date}" ! -newermt "${params.to_date}" -exec ls -lh {} \\; | awk '{printf "%s %s\n", $5, $9}'
+                '''
             }
         }
     }
